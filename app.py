@@ -14,14 +14,14 @@ color1='#92A5E8'
 color2='#8E44AD'
 color3='#FFC300'
 sourceurl = 'https://www.kaggle.com/c/titanic'
-githublink = 'https://github.com/plotly-dash-apps/304-titanic-dropdown'
+githublink = 'https://github.com/dsbcintuit/304-titanic-dropdown'
 
 
 ###### Import a dataframe #######
 df = pd.read_csv("https://raw.githubusercontent.com/austinlasseter/plotly_dash_tutorial/master/00%20resources/titanic.csv")
 df['Female']=df['Sex'].map({'male':0, 'female':1})
-df['Cabin Class'] = df['Pclass'].map({1:'first', 2: 'second', 3:'third'})
-variables_list=['Survived', 'Female', 'Fare', 'Age']
+df['Embarked'] = df['Embarked'].map({1:'Southampton', 2: 'Cherbourg', 3:'Queenstown'})
+variables_list=['Survived', 'Female', 'Fare', 'Age', 'Embarked']
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
@@ -55,19 +55,19 @@ def display_value(continuous_var):
     mydata1 = go.Bar(
         x=results.loc['first'].index,
         y=results.loc['first'][continuous_var],
-        name='First Class',
+        name='Southampton',
         marker=dict(color=color1)
     )
     mydata2 = go.Bar(
         x=results.loc['second'].index,
         y=results.loc['second'][continuous_var],
-        name='Second Class',
+        name='Cherbourg',
         marker=dict(color=color2)
     )
     mydata3 = go.Bar(
         x=results.loc['third'].index,
         y=results.loc['third'][continuous_var],
-        name='Third Class',
+        name='Queenstown',
         marker=dict(color=color3)
     )
 
