@@ -20,9 +20,9 @@ githublink = 'https://github.com/dsbcintuit/304-titanic-dropdown'
 ###### Import a dataframe #######
 df = pd.read_csv("https://raw.githubusercontent.com/austinlasseter/plotly_dash_tutorial/master/00%20resources/titanic.csv")
 df['Female']=df['Sex'].map({'male':0, 'female':1})
-df['Cabin Class'] = df['Pclass'].map({1:'first', 2: 'second', 3:'third'})
+df['Cabin Class'] = df['Pclass'].map({1:'First', 2: 'Second', 3:'Third'})
 # df['Port of Embarkation'] = df['Embarked'].map({'Southampton', 'Cherbourg', 'Queenstown'})
-variables_list=['Survived', 'Female', 'Fare', 'Age', 'Embarked']
+variables_list=['Survived', 'Female', 'Fare', 'Age']
 
 ########### Initiate the app
 external_stylesheets = ['https://codepen.io/chriddyp/pen/bWLwgP.css']
