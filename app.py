@@ -20,7 +20,8 @@ githublink = 'https://github.com/dsbcintuit/304-titanic-dropdown'
 ###### Import a dataframe #######
 df = pd.read_csv("https://raw.githubusercontent.com/austinlasseter/plotly_dash_tutorial/master/00%20resources/titanic.csv")
 df['Female']=df['Sex'].map({'male':0, 'female':1})
-df['Embarked'] = df['Embarked'].map({1:'Southampton', 2: 'Cherbourg', 3:'Queenstown'})
+df['Cabin Class'] = df['Pclass'].map({1:'first', 2: 'second', 3:'third'})
+# df['Port of Embarkation'] = df['Embarked'].map({'Southampton', 'Cherbourg', 'Queenstown'})
 variables_list=['Survived', 'Female', 'Fare', 'Age', 'Embarked']
 
 ########### Initiate the app
@@ -49,24 +50,24 @@ app.layout = html.Div([
 @app.callback(Output('display-value', 'figure'),
               [Input('dropdown', 'value')])
 def display_value(continuous_var):
-    grouped_mean=df.groupby(['Cabin Class', 'Embarked'])[continuous_var].mean()
+    grouped_mean=df.groupby(['Embarked', 'Cabin Class'])[continuous_var].mean()
     results=pd.DataFrame(grouped_mean)
     # Create a grouped bar chart
     mydata1 = go.Bar(
-        x=results.loc['first'].index,
-        y=results.loc['first'][continuous_var],
+        x=results.loc['Southampton'].index,
+        y=results.loc['Southampton'][continuous_var],
         name='Southampton',
         marker=dict(color=color1)
     )
     mydata2 = go.Bar(
-        x=results.loc['second'].index,
-        y=results.loc['second'][continuous_var],
+        x=results.loc['Cherbourg'].index,
+        y=results.loc['Cherbourg'][continuous_var],
         name='Cherbourg',
         marker=dict(color=color2)
     )
     mydata3 = go.Bar(
-        x=results.loc['third'].index,
-        y=results.loc['third'][continuous_var],
+        x=results.loc['Queenstown'].index,
+        y=results.loc['Queenstown'][continuous_var],
         name='Queenstown',
         marker=dict(color=color3)
     )
